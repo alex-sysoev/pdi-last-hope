@@ -4,4 +4,5 @@ config :hound, driver: "selenium", port: 4444, browser: "chrome", host: "${SELEN
 
 config :pdi_last_hope,
   email: "${EMAIL}",
-  password: "${PASSWORD}"
+  password: "${PASSWORD}",
+  issue: "${ISSUE}"

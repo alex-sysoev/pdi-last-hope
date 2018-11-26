@@ -13,6 +13,32 @@ defmodule PdiLastHope do
     available: "DISPONIBLE"
   }
 
+  @issues %{
+    "Ampliación de solicitud de PERMANENCIA DEFINITIVA en trámite" => "17",
+    "Ampliación de Solicitud de Visa en trámite" => "7",
+    "Ampliación de Turismo" => "1",
+    "Autorización de trabajo como Turista" => "3",
+    "Autorización de trabajo con visa en trámite" => "15",
+    "Entrega de Certificado de Permanencia Definitiva" => "19",
+    "Entrega de certificados de devolución de dinero" => "14",
+    "Estampados de visa en pasaportes" => "20",
+    "(PDI) Certificado de viajes y Registro de visa para postular a la Permanencia Definitiva" => "31",
+    "(PDI) Certificado de vigencia Permanencia Definitiva" => "33",
+    "(PDI) Duplicado de Registro de visa" => "35",
+    "(PDI) Registro de Visa" => "32",
+    "(PDI) Registro Permanencia Definitiva" => "26",
+    "Prórroga de Turismo" => "2",
+    "***REGULARIZACIÓN MIGRATORIA 2018*** (Estampado)" => "22",
+    "Reimpresiones de Ordenes de Pago" => "5",
+    "Sanción Empleador Paso 1: Cálculo del monto de la multa para solicitar vale vista en banco" => "10",
+    "Sanción Empleador Paso 2: Entrega de vale vista y emisión de resolución de sanción pagada" => "12",
+    "Sanción Extranjero Paso 1: Cálculo del monto de la multa para solicitar vale vista en banco" => "9",
+    "Sanción Extranjero Paso 2: Entrega de vale vista y emisión de resolución de sanción pagada" => "11",
+    "Títulos de residencia" => "13",
+    "*TRAMITADORES* (Apoderado en poder de otra persona)" => "23",
+    "Traspaso de visa" => "16"
+  }
+
   def exec do
     Hound.start_session()
 
@@ -25,7 +51,7 @@ defmodule PdiLastHope do
     button = Hound.Helpers.Page.find_element(:id, "btnReservarHora")
     Hound.Helpers.Element.click(button)
 
-    select_procedure("13", "130", "33")
+    select_procedure("13", "130", "#{issue()}")
     background()
     requirements()
     user_data()
@@ -164,5 +190,6 @@ defmodule PdiLastHope do
 
   defp email, do: Application.get_env(:pdi_last_hope, :email)
   defp password, do: Application.get_env(:pdi_last_hope, :password)
+  defp issue, do: Application.get_env(:pdi_last_hope, :issue)
 
 end
